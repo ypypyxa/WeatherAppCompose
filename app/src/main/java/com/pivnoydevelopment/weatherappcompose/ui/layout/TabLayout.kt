@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.pivnoydevelopment.weatherappcompose.ui.theme.GrayGlass
 import kotlinx.coroutines.launch
 
-@Preview
+@Preview (showBackground = true)
 @Composable
 fun TabLayout() {
     val tabList = listOf("Сегодня", "На неделю")
@@ -36,16 +36,16 @@ fun TabLayout() {
                 start = 5.dp,
                 end = 5.dp
             )
-            .clip(
+    ) {
+        TabRow(
+            modifier = Modifier.clip(
                 RoundedCornerShape(
                     topStart = 15.dp,
                     topEnd = 15.dp,
                     bottomStart = 5.dp,
                     bottomEnd = 5.dp
                 )
-            )
-    ) {
-        TabRow(
+            ),
             selectedTabIndex = pagerState.currentPage,
             containerColor = GrayGlass,
             indicator = { tabPositions ->
