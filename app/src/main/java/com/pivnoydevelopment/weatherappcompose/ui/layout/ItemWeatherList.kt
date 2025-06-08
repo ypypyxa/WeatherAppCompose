@@ -1,6 +1,6 @@
 package com.pivnoydevelopment.weatherappcompose.ui.layout
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,15 +35,16 @@ fun ItemWeatherList() {
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
-                modifier = Modifier.padding(
-                    start = 8.dp,
-                    top = 5.dp,
-                    bottom = 5.dp
-                )
+                modifier = Modifier
+                    .padding(
+                        start = 8.dp,
+                        top = 5.dp,
+                        bottom = 5.dp
+                    )
+                    .weight(1f)
             ) {
                 Text(
                     text = "12:00",
@@ -54,18 +55,28 @@ fun ItemWeatherList() {
                     color = Color.White
                 )
             }
-            Text(
-                text = "25°C",
-                color = Color.White,
-                style = TextStyle(fontSize = 25.sp)
-            )
-            AsyncImage(
-                model = "https://cdn.weatherapi.com/weather/64x64/day/116.png",
-                contentDescription = "WeatherImage",
-                modifier = Modifier
-                    .size(35.dp)
-                    .padding(top = 1.dp, end = 8.dp)
-            )
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "25°C",
+                    color = Color.White,
+                    style = TextStyle(fontSize = 25.sp)
+                )
+            }
+            Box(
+                modifier = Modifier.weight(1f),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                AsyncImage(
+                    model = "https://cdn.weatherapi.com/weather/64x64/day/116.png",
+                    contentDescription = "WeatherImage",
+                    modifier = Modifier
+                        .size(35.dp)
+                        .padding(top = 1.dp, end = 8.dp)
+                )
+            }
         }
     }
 }

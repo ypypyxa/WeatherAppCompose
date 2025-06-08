@@ -1,5 +1,6 @@
 package com.pivnoydevelopment.weatherappcompose.ui.layout
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -59,7 +60,10 @@ fun TabLayout() {
                     selected = pagerState.currentPage == index,
                     onClick = {
                         courutineScope.launch {
-                            pagerState.animateScrollToPage(index)
+                            pagerState.animateScrollToPage(
+                                page =  index,
+                                animationSpec = tween(durationMillis = 700)
+                            )
                         }
                     },
                     text = {
