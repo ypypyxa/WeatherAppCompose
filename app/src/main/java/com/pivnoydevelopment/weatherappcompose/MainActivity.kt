@@ -13,8 +13,6 @@ import com.pivnoydevelopment.weatherappcompose.ui.layout.CardMain
 import com.pivnoydevelopment.weatherappcompose.ui.layout.TabLayout
 import com.pivnoydevelopment.weatherappcompose.ui.theme.WeatherAppComposeTheme
 
-const val API_KEY = "2defcceec5a946db9f0145440250506"
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
