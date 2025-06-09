@@ -1,4 +1,4 @@
-# Online School
+# Weather App
 
 ## Описание
 
