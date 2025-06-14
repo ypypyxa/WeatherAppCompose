@@ -20,11 +20,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 import com.pivnoydevelopment.weatherappcompose.ui.theme.GrayGlass
 
 @Preview (showBackground = true)
 @Composable
-fun ItemWeatherList() {
+fun ItemWeatherList(item: WeatherModel = WeatherModel(
+        city = "Moscow",
+        time = "10:00",
+        currentTemp = "30°C",
+        condition = "Дождь",
+        icon = "//cdn.weatherapi.com/weather/64x64/day/302.png",
+        maxTemp = "",
+        minTemp = "",
+        hours = ""
+    )) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -47,7 +57,7 @@ fun ItemWeatherList() {
                     .weight(1f)
             ) {
                 Text(
-                    text = "12:00",
+                    text = item.time,
                     color = Color.White
                 )
                 Text(
@@ -60,7 +70,7 @@ fun ItemWeatherList() {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "25°C",
+                    text = item.currentTemp.ifEmpty { "${item.minTemp}/${item.maxTemp}" },
                     color = Color.White,
                     style = TextStyle(fontSize = 25.sp)
                 )
@@ -70,7 +80,7 @@ fun ItemWeatherList() {
                 contentAlignment = Alignment.CenterEnd
             ) {
                 AsyncImage(
-                    model = "https://cdn.weatherapi.com/weather/64x64/day/116.png",
+                    model = "https:${item.icon}",
                     contentDescription = "WeatherImage",
                     modifier = Modifier
                         .size(35.dp)

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 import com.pivnoydevelopment.weatherappcompose.ui.theme.GrayGlass
 import kotlinx.coroutines.launch
 
@@ -35,7 +37,8 @@ fun TabLayout() {
             .padding(
                 top =  5.dp,
                 start = 5.dp,
-                end = 5.dp
+                end = 5.dp,
+                bottom = 5.dp
             )
     ) {
         TabRow(
@@ -82,8 +85,41 @@ fun TabLayout() {
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(count = 15) {
-                    ItemWeatherList()
+                itemsIndexed(
+                    listOf(
+                        WeatherModel(
+                            city = "Moscow",
+                            time = "10:00",
+                            currentTemp = "30°C",
+                            condition = "Дождь",
+                            icon = "//cdn.weatherapi.com/weather/64x64/day/302.png",
+                            maxTemp = "",
+                            minTemp = "",
+                            hours = ""
+                        ),
+                        WeatherModel(
+                            city = "Moscow",
+                            time = "10:00",
+                            currentTemp = "30°C",
+                            condition = "Дождь",
+                            icon = "//cdn.weatherapi.com/weather/64x64/day/302.png",
+                            maxTemp = "",
+                            minTemp = "",
+                            hours = ""
+                        ),
+                        WeatherModel(
+                            city = "Moscow",
+                            time = "09/06/2025",
+                            currentTemp = "",
+                            condition = "Дождь",
+                            icon = "//cdn.weatherapi.com/weather/64x64/day/302.png",
+                            maxTemp = "30°C",
+                            minTemp = "20°C",
+                            hours = "12:00"
+                        ),
+                    )
+                ) {
+                    _, item -> ItemWeatherList(item)
                 }
             }
         }
