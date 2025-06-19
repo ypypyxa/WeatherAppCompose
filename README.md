@@ -25,4 +25,4 @@
 
 На данный момент готова только верстка
 
-<img src="https://iili.io/FF1FZCl.th.png" width="300">
+<img src="https://iili.io/FF1FZCl.png" width="300">
