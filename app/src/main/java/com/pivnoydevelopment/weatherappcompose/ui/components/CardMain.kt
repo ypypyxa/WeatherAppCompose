@@ -1,4 +1,4 @@
-package com.pivnoydevelopment.weatherappcompose.ui.layout
+package com.pivnoydevelopment.weatherappcompose.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,21 +14,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.pivnoydevelopment.weatherappcompose.R
+import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 import com.pivnoydevelopment.weatherappcompose.ui.theme.GrayGlass
 
-@Preview (showBackground = true)
 @Composable
-fun CardMain() {
+fun CardMain(currentDay: MutableState<WeatherModel>) {
     Column(
         modifier = Modifier
             .padding(5.dp)
@@ -49,12 +49,12 @@ fun CardMain() {
                 ) {
                     Text(
                         modifier = Modifier.padding(top = 8.dp, start = 8.dp),
-                        text = "06 Июня 2025 12:50",
+                        text = currentDay.value.time,
                         style = TextStyle(fontSize = 15.sp),
                         color = Color.White
                     )
                     AsyncImage(
-                        model = "https://cdn.weatherapi.com/weather/64x64/day/116.png",
+                        model = "https:${currentDay.value.icon}",
                         contentDescription = "WeatherImage",
                         modifier = Modifier
                             .size(35.dp)
@@ -62,17 +62,20 @@ fun CardMain() {
                     )
                 }
                 Text(
-                    text = "Москва",
+                    text = currentDay.value.city,
                     style = TextStyle(fontSize = 24.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "23°C",
+                    text = if(currentDay.value.currentTemp.isNotEmpty())
+                        currentDay.value.currentTemp
+                    else
+                        "${currentDay.value.maxTemp}°C / ${currentDay.value.minTemp}°C",
                     style = TextStyle(fontSize = 65.sp),
                     color = Color.White
                 )
                 Text(
-                    text = "Местами облачно",
+                    text = currentDay.value.condition,
                     style = TextStyle(fontSize = 16.sp),
                     color = Color.White
                 )
@@ -94,7 +97,7 @@ fun CardMain() {
                     }
                     Text(
                         modifier = Modifier.padding(top = 15.dp, start = 8.dp),
-                        text = "23°С / 12°С",
+                        text = "${currentDay.value.maxTemp}°С / ${currentDay.value.minTemp}°С",
                         style = TextStyle(fontSize = 15.sp),
                         color = Color.White
                     )

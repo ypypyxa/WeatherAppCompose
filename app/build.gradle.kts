@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.pivnoydevelopment.plugins.develop_properties")
 }
 
 android {
@@ -16,6 +17,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            type = "String",
+            name = "API_KEY",
+            value = "\"${developProperties.apiKey}\""
+        )
     }
 
     buildTypes {
@@ -35,6 +42,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
