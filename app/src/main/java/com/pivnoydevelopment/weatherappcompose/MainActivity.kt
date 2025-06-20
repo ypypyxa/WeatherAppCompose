@@ -14,6 +14,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.pivnoydevelopment.weatherappcompose.ui.components.DialogSearch
 import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 import com.pivnoydevelopment.weatherappcompose.ui.screen.MainScreen
 import com.pivnoydevelopment.weatherappcompose.ui.theme.WeatherAppComposeTheme
@@ -27,22 +28,29 @@ class MainActivity : ComponentActivity() {
                 val daysList = remember {
                     mutableStateOf(listOf<WeatherModel>())
                 }
+                val dialogState = remember {
+                    mutableStateOf(false)
+                }
                 val currentDay = remember {
-                    mutableStateOf(WeatherModel(
-                        "",
-                        "",
-                        "0.0",
-                        "",
-                        "",
-                        "0.0",
-                        "0.0",
-                        "",
-                        )
+                    mutableStateOf(
+                        WeatherModel("","","0.0","","","0.0","0.0","")
                     )
                 }
+
                 getData("Moscow", this, daysList, currentDay)
 
-                MainScreen(currentDay, daysList)
+                if (dialogState.value) {
+                    DialogSearch(dialogState, onSubmit = {
+                        getData( it, this, daysList, currentDay)
+                    })
+                }
+
+                MainScreen(
+                    currentDay,
+                    daysList,
+                    onClickRefresh = { getData("Moscow", this, daysList, currentDay) },
+                    onClickSearch = { dialogState.value = true }
+                )
             }
         }
     }
