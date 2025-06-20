@@ -28,7 +28,11 @@ import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 import com.pivnoydevelopment.weatherappcompose.ui.theme.GrayGlass
 
 @Composable
-fun CardMain(currentDay: MutableState<WeatherModel>) {
+fun CardMain(
+    currentDay: MutableState<WeatherModel>,
+    onClickRefresh: () -> Unit,
+    onClickSearch: () -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(5.dp)
@@ -85,7 +89,7 @@ fun CardMain(currentDay: MutableState<WeatherModel>) {
                 ) {
                     IconButton(
                         onClick = {
-
+                            onClickSearch.invoke()
                         }
                     ) {
                         Icon(
@@ -103,7 +107,7 @@ fun CardMain(currentDay: MutableState<WeatherModel>) {
                     )
                     IconButton(
                         onClick = {
-
+                            onClickRefresh.invoke()
                         }
                     ) {
                         Icon(

@@ -1,5 +1,6 @@
 package com.pivnoydevelopment.weatherappcompose.ui.screen
 
+import android.icu.text.StringSearch
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,9 @@ import com.pivnoydevelopment.weatherappcompose.ui.model.WeatherModel
 @Composable
 fun MainScreen(
     currentDay: MutableState<WeatherModel>,
-    daysList: MutableState<List<WeatherModel>>
+    daysList: MutableState<List<WeatherModel>>,
+    onClickRefresh: () -> Unit,
+    onClickSearch: () -> Unit
 ) {
     Image(
         painter = painterResource(id = R.drawable.bg_main),
@@ -35,7 +38,15 @@ fun MainScreen(
             .padding(WindowInsets.safeDrawing.asPaddingValues())
     ) {
         Column {
-            CardMain(currentDay)
+            CardMain(
+                currentDay,
+                onClickRefresh = {
+                    onClickRefresh.invoke()
+                },
+                onClickSearch = {
+                    onClickSearch.invoke()
+                }
+            )
             TabLayout(currentDay, daysList)
         }
     }
